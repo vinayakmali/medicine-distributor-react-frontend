@@ -1,0 +1,26 @@
+.root {
+	flex-grow: 1;
+}
+
+.menuButton {
+	margin-right: 20px;
+}
+
+.title {
+	flex-grow: 1;
+}
+
+.root a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 10px; 
+}
+
+.root a:hover,
+.root a:active,
+.root a.active {
+  color: #95bcf0;
+
+}

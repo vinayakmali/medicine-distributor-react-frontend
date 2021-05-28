@@ -1,0 +1,19 @@
+.submit {
+	margin: 24px 0px 16px !important;
+	padding: 12px !important
+}
+
+.paper {
+	margin-top: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.leftMainContainer {
+	float: left;
+}
+
+.btnStyle {
+	background-color: #000;
+}
