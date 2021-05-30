@@ -48,12 +48,13 @@ const Login = () => {
         .catch((error) => {});
     });
     let user = { email, password, latitude, longitude };
-    console.log(user);
+    // console.log(user);
     serv
       .authUser(user)
       .then((resp) => {
         const status = resp.data.success;
         if (!status) {
+          setLoading(false);
           ErrorMessage(resp.data.message);
         } else {
           dispatch({ type: "loginSuccess", userDet: resp.data });
@@ -68,6 +69,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         ErrorMessage(`Error Occured ${error}`);
       });
   };

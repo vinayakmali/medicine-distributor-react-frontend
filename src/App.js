@@ -9,15 +9,19 @@ import AssignDelivery from "./pages/AssignDelivery/AssignDelivery";
 import AllDelivery from "./pages/AssignDelivery/AllDelivery";
 import Medicines from "./pages/Medicine/Medicines";
 import AddEditMedicines from "./pages/Medicine/AddEditMedicines";
-import { withCookies, Cookies } from "react-cookie";
+import { Cookies } from "react-cookie";
+import { useSelector } from 'react-redux';
+
 const cookies = new Cookies();
 function App() {
   const tokenString = cookies.get("token");
-  const type = sessionStorage.getItem("type");
+  
   const history = useHistory();
   if (tokenString === null) {
     history.push("/login");
   }
+  const test = useSelector((state) => state.userDetails);
+  const type = test.type;
   return (
     <div>
       <Switch>
