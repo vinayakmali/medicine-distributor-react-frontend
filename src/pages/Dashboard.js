@@ -1,27 +1,19 @@
-import Topheader from '../components/header';
-import Report from './Report/report'
-import { withCookies, Cookies } from 'react-cookie';
-import { useDispatch, useSelector } from 'react-redux';
-
-const type = sessionStorage.getItem('type');
-const cookies = new Cookies();
-
+import { useEffect } from "react";
+import Topheader from "../components/header";
+import Report from "./Report/report";
 
 const Dashboard = (props) => {
-//	const dispatch = useDispatch();
-
-//	dispatch({type:'citywise',data:''})
-
-const test = useSelector(state => state.citywisereport);
-console.log(test)
-return (
-		<div>
-			<Topheader/>	
-			
-			{(type === "admin") ?<Report/>:''}
-			{ (type === 'agent') ? <h1>Welcome to Dashboard....</h1>:''}
-			</div>
-	);
-}
-
+  let type = props.type ?? "admin";
+  if (typeof props.type == "undefined") {    
+    type = sessionStorage.getItem("type");
+  }
+  // useEffect(() => {}, [type]);
+  return (
+    <div>
+      <Topheader />
+      {props.type === "admin" ? <Report /> : ""}
+      {props.type === "agent" ? <h1>Welcome to Dashboard....</h1> : ""}
+    </div>
+  );
+};
 export default Dashboard;
