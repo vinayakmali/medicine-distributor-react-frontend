@@ -67,42 +67,43 @@ material-react-dashboard
 ├── public
 ├── docs
 └── src
-	├── assets
 	├── common
 	├── components
-	├── helpers
-	├── icons
-	├── layouts
-	├── theme
-	├── views
-	│	├── Account
+	│	├── UI
+	│	│	├── Dropdown
+	│	│	│	├── Dropdown
+	│	│	│	├── Dropdown.module.css
+	│	│	├── InputButton
+	│	│	│	├── InputButton
+	│	│	├── InputText
+	├── pages
+	│	├── AssignDelivery
+	│	│	├── AssignDelivery
+	│	│	├── AllDelivery
+	│	├── Login
+	│	│	├── Login
+	│	│	├── Login.module.css
+	│	├── Medicine
+	│	│	├── AddEditMedicine
+	│	│	├── Medicines
+	│	│	├── Medicines.module.css
+	│	├── Report
+	│	│	├── report
+	│	├── Store
+	│	│	├── AddEditMedicalStore
+	│	│	├── MedicalStore
+	│	│	├── MedicalStore.module.css
+	│	├── Users
+	│	│	├── AddEditAgents
+	│	│	├── Agent
+	│	│	├── Agent.module.css
 	│	├── Dashboard
-	│	├── Icons
-	│	├── NotFound
-	│	├── ProductList
-	│	├── Settings
-	│	├── SignIn
-	│	├── SignUp
-	│	├── Typography
-	│	└── UserList
-	├── App.jsx
-	├── index.jsx
-	└── Routes.jsx
+	│	├── Map
+	├── Service
+	│	│	├── httpService
+	├── App.js
+	├── index.js
+	└── config.jsx
+	└── .env	
 ```
 
-## Resources
-
-- More freebies like this one: <https://devias.io>
-
-## Reporting Issues:
-
-- [Github Issues Page](https://github.com/devias-io/react-material-dashboard/issues?ref=devias-io)
-
-## License
-
-- Licensed under MIT (https://github.com/devias-io/react-material-dashboard/blob/master/LICENSE.md)
-
-## Contact Us
-
-- Email Us: support@deviasio.zendesk.com
-- [Follow us on Instagram](https://www.instagram.com/deviasio/)
