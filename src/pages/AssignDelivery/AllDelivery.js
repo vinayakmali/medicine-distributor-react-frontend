@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Map from '../Map'
-
+import { useSelector, useDispatch } from 'react-redux';
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -61,6 +61,7 @@ textTransform: 'uppercase',
 };
 
 const MedicalStore = (props) => {
+  const latlon = useSelector(state => state.latlon);
   const classes = useStyles();
   const serv = new httpservice();
   const [editRowsModel, setEditRowsModel] = React.useState({});
@@ -68,7 +69,7 @@ const MedicalStore = (props) => {
   const [rowsPerPage, setDeliveryPerPage] = React.useState(10);
   const [rows,setDelivery] = useState([]);
   const [modalStyle] = React.useState(getModalStyle);
-
+	const dispatch = useDispatch();
   const renderDetailsButton = (params) => {
     return (
         <strong>
@@ -78,9 +79,10 @@ const MedicalStore = (props) => {
                 size="small"
                 style={{ marginLeft: 16 }}
                 onClick={() => {
+                 
                   if(params.row.lon !== null && params.row.lat !== null){
-                    localStorage.setItem('lona', params.row.lon);
-                    localStorage.setItem('lata', params.row.lat);
+
+                    dispatch({type: "latlon", data: {lat : params.row.lat,lon : params.row.lon}});
                     setOpen(true);
                   }else{
                     alert('Location is not set by Agent')
@@ -156,7 +158,7 @@ const MedicalStore = (props) => {
 
       <Modal aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description" open={open} onClose={handleClose}>
         <div style={modalStyle} className={classes.paper}>
-          <Map/>
+          <Map latlon={latlon}/>
         </div>
       </Modal>
     </Paper>
