@@ -16,7 +16,7 @@ class SimpleMap extends Component {
   };
  useSes
   render() {
-      
+
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '60vh', width: '100%' }}>
@@ -26,8 +26,8 @@ class SimpleMap extends Component {
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
-            lat={localStorage.getItem('lata')}
-            lng={localStorage.getItem('lona')}
+            lat={this.props.latlon.lat}
+            lng={this.props.latlon.lon}
             text={"Your Location"}
           />
         </GoogleMapReact>
