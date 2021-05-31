@@ -6,7 +6,7 @@ const InputText = (props) => {
 		props.onChange(e.target.value);
 	}
 	return (
-		<TextField {...props.attributes} onChange={handleChange} />
+		<TextField {...props.attributes} data-testid={ props.attributes.testid } onChange={handleChange} />
 	);
 }
 

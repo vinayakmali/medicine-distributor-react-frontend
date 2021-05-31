@@ -1,23 +1,46 @@
 import React from "react";
-import { mount,configure } from "enzyme";
+import { render, cleanup ,fireEvent ,waitFor,debug} from "@testing-library/react";
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import Adapter from "enzyme-adapter-react-17-updated";
-
+import "@testing-library/jest-dom/extend-expect"
 import Login from "../pages/Login/Login";
-
-configure({ adapter: new Adapter() });
-
+beforeEach(() => {
+  jest.resetAllMocks();
+});
+afterEach(() => {
+  cleanup();
+});
 const initialState = {};
 const createMockStore = configureMockStore(initialState);
 describe("Login Form fComponent", () => {
+  const mockStore = createMockStore({});
   test("Login Form Is Rendering", () => {
-    const mockStore = createMockStore({});
-    const wrapper = mount(
+    const { getByTestId } = render(
       <Provider store={mockStore}>
         <Login />
       </Provider>
     );
-    expect(wrapper.find("#login")).toHaveLength(1);
+    expect(getByTestId("loginForm")).toBeInTheDocument();
+  });
+  test("Login Form validation test",async () => {
+    const { getByTestId , debug } = render(
+      <Provider store={mockStore}>
+        <Login />
+      </Provider>
+    );
+    // debug();
+    const emailElement = getByTestId("emailText").querySelector('input');
+    const passwordElement = getByTestId("passwordText").querySelector('input');
+    const formElement = getByTestId("formElement");
+    fireEvent.submit(formElement);
+    const errorElement = getByTestId("errorText");
+    expect(errorElement.textContent).toBe("Please enter Username");
+    fireEvent.change(emailElement, {
+      target: {
+        value:"karan.chauhan@hotmail.com"
+      }
+    }) 
+    fireEvent.submit(formElement);
+    expect(errorElement.textContent).toBe("Please enter Password");
   });
 });

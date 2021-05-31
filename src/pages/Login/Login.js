@@ -20,10 +20,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["name"]);
   const [loading, setLoading] = useState(false);
-  const [email, setUserName] = useState();
+  const [email, setUserName] = useState("");
   const [latitude, setlat] = useState();
   const [longitude, setLong] = useState();
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const [error, ErrorMessage] = useState("");
   const tokenString = sessionStorage.getItem("token");
   const history = useHistory();
@@ -34,6 +34,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    if (email === "") {
+      setLoading(false);
+      ErrorMessage("Please enter Username");
+      return false;
+    }
+    if (password === "") {
+      setLoading(false);
+      ErrorMessage("Please enter Password");
+      return false;
+    }
     navigator.geolocation.getCurrentPosition(async function (position) {
       const user_id = sessionStorage.getItem("user_id");
       serv
@@ -64,7 +74,6 @@ const Login = () => {
           sessionStorage.setItem("user_id", resp.data.user_id);
           sessionStorage.setItem("name", resp.data.name);
           setLoading(false);
-
           history.push("/dashboard");
         }
       })
@@ -81,8 +90,10 @@ const Login = () => {
     id: "email",
     label: "Email Address",
     name: "email",
-    autoComplete: "email",
+    value: email,
+    autoComplete: "false",
     autoFocus: true,
+    testid:"emailText"
   };
   const passwordAttr = {
     variant: "outlined",
@@ -93,7 +104,9 @@ const Login = () => {
     label: "Password",
     type: "password",
     id: "password",
-    autoComplete: "current-password",
+    value: password,
+    autoComplete: "false",
+    testid:"passwordText"
   };
   const button = {
     type: "submit",
@@ -101,9 +114,10 @@ const Login = () => {
     variant: "contained",
     color: "primary",
     className: classes.submit,
+    testid:"loginButton"
   };
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" data-testid="loginForm">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -113,10 +127,11 @@ const Login = () => {
           {" "}
           Sign in{" "}
         </Typography>
-        {error}
+        <span data-testid="errorText">{error}</span>
         <form
           className={classes.form}
           id="login"
+          data-testid="formElement"
           onSubmit={handleSubmit}
           noValidate
         >
@@ -126,7 +141,7 @@ const Login = () => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <InputButton attributes={button} disabled={loading}>
+          <InputButton  attributes={button} disabled={loading}>
             {loading && (
               <CircularProgress size={24} className={classes.buttonProgress} />
             )}
