@@ -7,7 +7,7 @@ if (sessionStorage.getItem("userDetails"))
 const initialState = {
   isLoggedIn: isLoggedIn,
   userDetails: userD,
-  datasets: {},
+  latlon: {},
   labels: {},
 };
 const stateReducer = (state = initialState, action) => {
@@ -19,19 +19,12 @@ const stateReducer = (state = initialState, action) => {
       userDetails: { ...action.userDet },
     };
   }
-  if (action.type === "citywise") {
+  if (action.type === "latlon") {
     return {
       isLoggedIn: state.isLoggedIn,
       userDetails: state.userDetails,
-      datasets: action.data.datasets,
+      latlon: action.data,
       labels: action.data.labels,
-    };
-  }
-  if (action.type === "agent_wise") {
-    return {
-      isLoggedIn: state.isLoggedIn,
-      userDetails: state.userDetails,
-      report: action,
     };
   }
   return state;
