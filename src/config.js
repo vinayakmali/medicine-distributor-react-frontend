@@ -1,5 +1,5 @@
 const config = {
-    baseUrl: 'http://localhost/medicine-distributor-php-backend/api/',
+    baseUrl: 'http://prashantpuranik.com/api/',
     endPoints:{
         users: 'all_users.php',
     }
